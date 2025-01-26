@@ -1,0 +1,22 @@
+services:
+
+  redis:
+    container_name: redis
+    restart: always
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - redis_data:/data
+
+  bot:
+    container_name: bot
+    image: inferno681/wb_bot:latest
+    env_file:
+      - .env
+    depends_on:
+      - redis
+    restart: always
+
+volumes:
+  redis_data:
