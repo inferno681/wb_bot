@@ -2,6 +2,6 @@ api:
   base_url: "https://wbservice-test.ddns.net/api/v1"
 
 redis:
-  host: "localhost"
+  host: "redis"
   port: 6379
   redis_db: 0

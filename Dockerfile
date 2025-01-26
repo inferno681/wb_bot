@@ -14,7 +14,7 @@ RUN mkdir -p ./src
 
 COPY ./src/config  ./src/config
 
-COPY ./src/app  ./src/app
+COPY ./src/bot  ./src/bot
 
 ENV PYTHONPATH=/app/src/
 
