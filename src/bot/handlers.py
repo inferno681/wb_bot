@@ -40,6 +40,7 @@ async def handle_article(message: Message, state: FSMContext):
 
     if message.text == BotText.cancel:
         await cancel_handler(message, state)
+        return
 
     if message.text and message.text.isdigit():
         article = int(message.text)
