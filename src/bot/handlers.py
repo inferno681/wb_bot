@@ -29,7 +29,7 @@ async def cmd_start(message: Message):
 async def ask_article(message: Message, state: FSMContext):
     """Ask article handler."""
     await state.set_state(CollectData.article)
-    await state.set_data({'message': message.text})
+    await state.update_data({'message': message.text})
     await message.reply(BotText.ask_article, reply_markup=cancel_kb)
 
 
@@ -38,17 +38,14 @@ async def handle_article(message: Message, state: FSMContext):
     """Article processing."""
     last_message = (await state.get_data()).get('message')
 
+    if message.text == BotText.cancel:
+        await cancel_handler(message, state)
+
     if message.text and message.text.isdigit():
         article = int(message.text)
     else:
         await message.answer(BotText.article_isdigit_message)
         return
-
-    if not message.text.isdigit():
-        await message.answer(BotText.article_isdigit_message)
-        return
-
-    article = int(message.text)
 
     match last_message:
         case BotText.get_data:
